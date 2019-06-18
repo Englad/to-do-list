@@ -15,19 +15,43 @@ namespace ToDoList
 
     public partial class startForm : Form
     {
-        string loc1path = @"D:\Coding Projects 2\Chashtag\ToDoList\ToDoList\loc1.txt";
-        string loc2path = @"D:\Coding Projects 2\Chashtag\ToDoList\ToDoList\loc2.txt";
-        string path = @"D:\Coding Projects 2\Chashtag\ToDoList\ToDoList\";
+        public string path = "";
+        string loc1path = "loc1.txt";
+        string loc2path = "loc2.txt";
+        string theFile;
         int loc1 = 29;
         int loc2 = 85;
         string loc2original = "85";
+        string thePath = "";
         public static int ButtonClicked = 1;
+
 
 
         public startForm()
         {
+
+
             InitializeComponent();
-        }
+                if (!File.Exists(".\\theFile.txt"))
+                {
+                    FolderBrowserDialog fbd = new FolderBrowserDialog();
+                    if (fbd.ShowDialog() == DialogResult.OK)
+                    {
+                        path = fbd.SelectedPath;
+                        loc1path = Path.Combine(path, "loc1.txt");
+                        loc2path = Path.Combine(path, "loc2.txt");
+                        theFile = Path.Combine("./", "theFile.txt");
+                        File.WriteAllText(loc1path, loc1.ToString());
+                        File.WriteAllText(loc2path, loc2.ToString());
+                        File.WriteAllText(theFile, "something");
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -37,10 +61,8 @@ namespace ToDoList
 
         private void firstNote_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            secondForm secondF = new secondForm("note1");
+            secondForm secondF = new secondForm("note1", path);
             secondF.ShowDialog();
-            //this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -59,7 +81,7 @@ namespace ToDoList
         void newButton_Click(object sender, System.EventArgs e)
         {
             var butText = (sender as Button).Text;
-            secondForm secondF = new secondForm(butText);
+            secondForm secondF = new secondForm(butText, path);
             secondF.ShowDialog();
         }
 
@@ -77,27 +99,27 @@ namespace ToDoList
 
         private void startForm_Load(object sender, EventArgs e)
         {
-            if (File.Exists(path + "Note 2.txt"))
+            if (File.Exists(Path.Combine(path, "Note 2.txt")))
             {
                 ButtonClicked = 2;
                 generateButton();
             }
-            if (File.Exists(path + "Note 3.txt"))
+            if (File.Exists(Path.Combine(path, "Note 3.txt")))
             {
                 ButtonClicked = 3;
                 generateButton();
             }
-            if (File.Exists(path + "Note 4.txt"))
+            if (File.Exists(Path.Combine(path, "Note 4.txt")))
             {
                 ButtonClicked = 4;
                 generateButton();
             }
-            if (File.Exists(path + "Note 5.txt"))
+            if (File.Exists(Path.Combine(path, "Note 5.txt")))
             {
                 ButtonClicked = 5;
                 generateButton();
             }
-            if (File.Exists(path + "Note 6.txt"))
+            if (File.Exists(Path.Combine(path, "Note 6.txt")))
             {
                 ButtonClicked = 6;
                 generateButton();

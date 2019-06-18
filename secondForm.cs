@@ -14,23 +14,22 @@ namespace ToDoList
 
     public partial class secondForm : Form
     {
-        private string path;
 
-        public secondForm(string butText)
+        string path;
+
+        public secondForm(string butText, string path)
         {
             InitializeComponent();
-            this.path = @"D:\Coding Projects 2\Chashtag\ToDoList\ToDoList\" + butText + ".txt";
-            //startForm.ButtonClicked;
-            //startForm.ButtonClicked;
+            this.path = Path.Combine(path, butText + ".txt");
+            
 
-            if (File.Exists(path))
+             if (File.Exists(Path.Combine(path, butText + ".txt")))
             {
-                userTextBox.Text = File.ReadAllText((path));
-            }
-            else
-            {
-
-            }
+                userTextBox.Text = File.ReadAllText(Path.Combine(path, butText + ".txt"));
+           }
+          else
+           {
+          }
         }
 
         private void userTextBox_TextChanged(object sender, EventArgs e)
@@ -41,7 +40,7 @@ namespace ToDoList
         private void saveButton_Click(object sender, EventArgs e)
         {
             File.WriteAllText(path, userTextBox.Text);
-            DialogResult noMoreButtons = MessageBox.Show("File saved!");
+            DialogResult saveFile = MessageBox.Show("File saved! " + path);
         }
 
         private void button1_Click(object sender, EventArgs e)
