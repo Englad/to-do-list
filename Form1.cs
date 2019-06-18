@@ -48,8 +48,13 @@ namespace ToDoList
                 }
                 else
                 {
-                    return;
-                }
+                    loc1path = Path.Combine(path, "loc1.txt");
+                    loc2path = Path.Combine(path, "loc2.txt");
+                 theFile = Path.Combine("./", "theFile.txt");
+                 File.WriteAllText(loc1path, loc1.ToString());
+                 File.WriteAllText(loc2path, loc2.ToString());
+                 File.WriteAllText(theFile, "something");
+            }
             }
             
 
