@@ -32,7 +32,7 @@ namespace ToDoList
 
 
             InitializeComponent();
-                if (!File.Exists(".//theFile.txt"))
+                if (!File.Exists("./theFile.txt"))
                 {
                     FolderBrowserDialog fbd = new FolderBrowserDialog();
                     if (fbd.ShowDialog() == DialogResult.OK)
